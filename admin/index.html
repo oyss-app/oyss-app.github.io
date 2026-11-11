@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OYSS İçerik Yönetimi</title>
+<link rel="stylesheet" href="style.css">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self' https://*.supabase.co; object-src 'none'; base-uri 'none'; form-action 'self'">
+</head>
+<body>
+<aside><div class="brand">◈ OYSS<span>İçerik Yönetimi</span></div><a href="#library" class="nav active">İçerik kütüphanesi</a><a href="#connection" class="nav">Bağlantı ve giriş</a><div class="aside-foot">Lunavor<br>Yazılı Koçum</div></aside>
+<main>
+<header><div><small>YAZILIYA HAZIRLIK</small><h1>İçerik kütüphanesi</h1><p>Sınıfını seç, içeriği düzenle, hazır olduğunda yayımla.</p></div><button id="new" class="primary">+ Yeni içerik</button></header>
+<div id="mode" class="banner">Yerel önizleme hazırlanıyor…</div>
+<div id="status" role="status" aria-live="polite"></div>
+<section id="library">
+<div class="stats"><article><strong id="total">0</strong><span>İçerik</span></article><article><strong id="published">0</strong><span>Yayında</span></article><article><strong id="drafts">0</strong><span>Taslak</span></article></div>
+<div class="filters"><label>İçerik ara<input id="search" type="search" placeholder="Başlık veya yayıncı"></label><label>Sınıf<select id="filter-grade"><option value="">Tüm sınıflar</option></select></label><label>Tür<select id="filter-kind"><option value="">Tüm türler</option><option value="pdf">PDF</option><option value="video">Video</option></select></label><label>Durum<select id="filter-state"><option value="">Tüm durumlar</option><option value="published">Yayında</option><option value="draft">Taslak</option></select></label></div>
+<div class="table-wrap"><table><thead><tr><th>İçerik</th><th>Sınıf / Ders</th><th>Yazılı</th><th>Durum</th><th>İşlem</th></tr></thead><tbody id="rows"></tbody></table><p id="empty" hidden>Bu filtrelerde içerik bulunamadı.</p></div>
+<div class="pagination"><span id="count"></span><button id="previous">Önceki</button><button id="next">Sonraki</button><button id="export">JSON yedeği indir</button></div>
+</section>
+<section id="connection" class="connection"><h2>Bağlantı ve giriş</h2><p id="connection-hint">OYSS yönetici hesabınla giriş yap.</p>
+<details><summary>Gelişmiş bağlantı ayarları</summary><form id="config-form" class="form-grid"><label>Supabase proje adresi<input id="project-url" type="url" placeholder="https://proje.supabase.co" required></label><label>Herkese açık anon anahtarı<input id="anon-key" type="password" autocomplete="off" required></label><button class="primary">Projeye bağlan</button></form>
+</details><form id="email-form" hidden><label>Yetkili e-posta adresi<input id="email" type="email" autocomplete="email" required></label><button>Giriş bağlantısı gönder</button></form>
+<form id="otp-form" hidden><label>E-posta kodu<input id="otp" inputmode="numeric" autocomplete="one-time-code" required></label><button class="primary">Giriş yap</button></form>
+<button id="logout" hidden>Oturumu kapat</button><button id="offline">Yerel önizlemeye dön</button>
+</section>
+</main>
+<dialog id="editor"><form id="edit-form"><div class="dialog-head"><div><small>İÇERİK DÜZENLE</small><h2 id="edit-heading">Yeni içerik</h2></div><button type="button" id="close" aria-label="Kapat">×</button></div>
+<label>Başlık<input id="title" maxlength="300" required></label>
+<div class="form-grid"><label>Sınıf<select id="grade" required></select></label><label>Ders<select id="subject" required></select></label><label>Yazılı<select id="exam"><option value="1-1">1. dönem 1. yazılı</option><option value="1-2">1. dönem 2. yazılı</option><option value="2-1">2. dönem 1. yazılı</option><option value="2-2">2. dönem 2. yazılı</option></select></label><label>Tür<select id="kind"><option value="pdf">PDF</option><option value="video">Video</option></select></label></div>
+<label>Yayıncı veya kanal<input id="publisher" maxlength="200"></label><label>PDF veya video bağlantısı<input id="url" type="url" placeholder="https://…"></label><label>Veya PDF dosyası yükle<input id="file" type="file" accept="application/pdf,.pdf"></label><p class="hint">PDF en fazla 25 MB. Dosya yüklemek için canlı projeye giriş yapmalısın. Taslaklar uygulamada görünmez.</p>
+<p id="editor-error" role="alert"></p><div class="dialog-actions"><button type="submit" id="save">Taslak olarak kaydet</button><button type="button" id="publish" class="primary">Yayımla</button></div></form></dialog>
+<script src="app.js" type="module"></script>
+</body></html>
